@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    fusuma (2.5.1)
+    memoized (1.1.1)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  fusuma (~> 2.5)
+  memoized (~> 1.1)
+
+BUNDLED WITH
+   2.3.7
