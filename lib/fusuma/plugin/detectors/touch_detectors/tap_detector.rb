@@ -5,29 +5,33 @@ module Fusuma
     module Detectors
       module TouchDetectors
         class TapDetector < Base
-          TAP_HOLD_THRESHOLD = 0.5 # TODO: configurable
-          JITTER_THRESHOLD = 1.0 # TODO: configurable
 
-          def detect
+          def detect(touch_buffer)
             MultiLogger.debug('> tap detector')
-            MultiLogger.debug('  finalized?')
-            return unless finalized?
-            MultiLogger.debug('  tap threshold?')
-            return unless end_time - begin_time <= TAP_HOLD_THRESHOLD
 
-            MultiLogger.debug('  jitter?')
-            update_events.each do |finger, events|
-              return unless events.all? do |event|
-                event.record.x_mm.between?(begin_positions[finger][0] - JITTER_THRESHOLD, begin_positions[finger][0] + JITTER_THRESHOLD) &&
-                  event.record.y_mm.between?(begin_positions[finger][1] - JITTER_THRESHOLD, begin_positions[finger][1] + JITTER_THRESHOLD)
-              end
-            end
+            MultiLogger.debug('  no movement?')
+            return if touch_buffer.moved?
 
-            MultiLogger.debug('  tap detected!')
-            Plugin::Events::Records::TouchRecords::TapRecord.new(finger: finger)
+            MultiLogger.debug('  began?')
+            return unless touch_buffer.began?
+
+            MultiLogger.debug('  ended?')
+            return unless touch_buffer.ended?
+
+            MultiLogger.debug('  tap / hold threshold?')
+            return unless touch_buffer.duration <= tap_hold_threshold
+
+            MultiLogger.debug("  tap (#{touch_buffer.finger}) detected!")
+            Plugin::Events::Records::TouchRecords::TapRecord.new(finger: touch_buffer.finger)
           end
 
-        end
+          private
+
+          def tap_hold_threshold
+            0.5 # TODO: configurable
+          end
+
+        end # class TapDetector
       end
     end
   end

@@ -9,27 +9,11 @@ module Fusuma
         module TouchRecords
           class TapRecord < Base
 
-            def initialize(finger:)
-              super()
-              @finger = finger
+            def repeatable?
+              false
             end
 
-            def finalized?
-              true
-            end
-
-            def create_index_record
-              Events::Records::IndexRecord.new(
-                index: Config::Index.new(
-                  [
-                    Config::Index::Key.new('tap'),
-                    Config::Index::Key.new(@finger)
-                  ]
-                )
-              )
-            end
-
-          end
+          end # class TapRecord
         end
       end
     end
