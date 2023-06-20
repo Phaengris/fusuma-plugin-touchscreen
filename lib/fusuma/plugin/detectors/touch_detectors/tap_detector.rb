@@ -18,17 +18,11 @@ module Fusuma
             MultiLogger.debug('  ended?')
             return unless touch_buffer.ended?
 
-            MultiLogger.debug('  tap / hold threshold?')
+            MultiLogger.debug("  tap / hold threshold? (duration #{touch_buffer.duration})")
             return unless touch_buffer.duration <= tap_hold_threshold
 
             MultiLogger.debug("  tap (#{touch_buffer.finger}) detected!")
             Plugin::Events::Records::TouchRecords::TapRecord.new(finger: touch_buffer.finger)
-          end
-
-          private
-
-          def tap_hold_threshold
-            0.5 # TODO: configurable
           end
 
         end # class TapDetector

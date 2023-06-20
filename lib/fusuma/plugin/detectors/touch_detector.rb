@@ -11,19 +11,18 @@ module Fusuma
   module Plugin
     module Detectors
       class TouchDetector < Detector
-        # SOURCES = %w[touch timer].freeze
-        SOURCES = %w[touch].freeze
+        SOURCES = %w[touch timer].freeze
 
         def initialize(*)
           super
           @detectors = [
             Fusuma::Plugin::Detectors::TouchDetectors::TapDetector,
-            # Fusuma::Plugin::Detectors::TouchDetectors::HoldDetector,
             Fusuma::Plugin::Detectors::TouchDetectors::SwipeDetector,
           # Fusuma::Plugin::Detectors::TouchDetectors::PinchDetector,
           # Fusuma::Plugin::Detectors::TouchDetectors::RotateDetector,
           # Fusuma::Plugin::Detectors::TouchDetectors::EdgeDetector
           ].map(&:new)
+          @detectors << (@hold_detector = Fusuma::Plugin::Detectors::TouchDetectors::HoldDetector.new)
           @last_known_gesture = nil
         end
 
@@ -31,32 +30,45 @@ module Fusuma
           events = []
 
           timer_buffer = buffers.find { |b| b.type == 'timer' }
+          touch_buffer = buffers.find { |b| b.type == 'touch' }
+          @touch_buffer = touch_buffer || @touch_buffer
+
           if timer_buffer &&
             timer_buffer.events.any? &&
             @last_known_gesture &&
             (timer_buffer.events.last.time - @last_known_gesture.time) > event_expire_time
 
-            # TODO: forcefully end the gesture
+            # TODO: should we also clear the touch buffer?
             events << create_event(record: @last_known_gesture.record.create_index_record(status: 'end', trigger: :repeat)) if @last_known_gesture.record.repeatable?
             @last_known_gesture = nil
           end
 
-          touch_buffer = buffers.find { |b| b.type == 'touch' }
-          return events if touch_buffer.nil?
+          if timer_buffer
+            # if this is a timer tick, we have to have saved touch buffer to work with
+            return events if @touch_buffer.nil? || @touch_buffer.empty?
+          else
+            # if not, we have to have a new touch buffer events
+            return events if touch_buffer.nil? || touch_buffer.empty?
+          end
 
-          if touch_buffer.ended? && @last_known_gesture
+          if @touch_buffer.ended? && @last_known_gesture
             events << create_event(record: @last_known_gesture.record.create_index_record(status: 'end', trigger: :repeat)) if @last_known_gesture.record.repeatable?
             @last_known_gesture = nil
           end
 
           gesture_record = nil
-          @detectors.each do |detector|
-            gesture_record = detector.detect(touch_buffer)
-            break if gesture_record
+          if touch_buffer
+            @detectors.each do |detector|
+              gesture_record = detector.detect(@touch_buffer)
+              break if gesture_record
+            end
+          else
+            return events if @touch_buffer.empty?
+            gesture_record = @hold_detector.detect(@touch_buffer)
           end
 
           if gesture_record
-            touch_buffer.clear
+            @touch_buffer.clear
             if gesture_record.repeatable? && @last_known_gesture&.record == gesture_record
               @last_known_gesture = create_event(record: gesture_record)
               events << create_event(record: gesture_record.create_index_record(status: 'update', trigger: :repeat))

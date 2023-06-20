@@ -12,6 +12,7 @@ module Fusuma
         def initialize(*args)
           super()
           @finger_events_map = {}
+          @mem = {}
           @last_event_time = nil
         end
 
@@ -70,29 +71,45 @@ module Fusuma
           reset_memoized
         end
 
+        def empty?
+          @finger_events_map.empty?
+        end
+
         def finger
-          @finger ||= @finger_events_map.keys.count
+          @mem[:finger] ||= @finger_events_map.keys.count
         end
 
         def began?
-          @began ||= @finger_events_map.any? && @finger_events_map.all? { |_, events| events.first&.record.status == "begin" }
+          @mem[:began] ||= @finger_events_map.any? && @finger_events_map.all? { |_, events| events.first&.record.status == "begin" }
         end
 
         def ended?
-          @ended ||= @finger_events_map.any? && @finger_events_map.all? { |_, events| events.last&.record.status == "end" }
+          @mem[:ended] ||= @finger_events_map.any? && @finger_events_map.all? { |_, events| events.last&.record.status == "end" }
         end
 
         def moved?
           # TODO: a quicker way to do this?
-          @moved ||= finger_movements.any? && finger_movements.all? { |finger, movement| movement[:distance] > jitter_threshold }
+          @mem[:moved] ||= finger_movements.any? && finger_movements.all? { |finger, movement| movement[:distance] > jitter_threshold }
         end
 
         def duration
-          @duration ||= @finger_events_map.values.map { |events| events.last.time - events.first.time }.max
+          @mem[:duration] ||= if ended?
+                                end_time - begin_time
+                              else
+                                Time.now - begin_time
+                              end
+        end
+
+        def begin_time
+          @mem[:begin_time] ||= @finger_events_map.values.map { |events| events.first.time }.min
+        end
+
+        def end_time
+          @mem[:end_time] ||= @finger_events_map.values.map { |events| events.last.time }.max
         end
 
         def finger_movements
-          @finger_movements ||= @finger_events_map.map do |finger, events|
+          @mem[:finger_movements] ||= @finger_events_map.map do |finger, events|
             position_events = events.select { |e| e.record.position? }
             next if position_events.size < 2 # we need at least first and last position
 
@@ -153,6 +170,7 @@ module Fusuma
                 angle += 360 if angle < 0
                 distance = Math.sqrt((last_position.record.x_mm - first_position.record.x_mm)**2 + (last_position.record.y_mm - first_position.record.y_mm)**2)
               end
+              next if distance < jitter_threshold
 
               [finger, { angle: angle, distance: distance }]
             end
@@ -170,12 +188,7 @@ module Fusuma
         end
 
         def reset_memoized
-          @finger_movements = nil
-          @duration = nil
-          @finger = nil
-          @began = nil
-          @ended = nil
-          @moved = nil
+          @mem = {} if @mem.any?
         end
 
       end # class TouchBuffer
