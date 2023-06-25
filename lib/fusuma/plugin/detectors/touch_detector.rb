@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'fusuma/plugin/detectors/detector'
+
 require_relative './touch_detectors/tap_detector'
 require_relative './touch_detectors/hold_detector'
 require_relative './touch_detectors/swipe_detector'
@@ -51,7 +53,8 @@ module Fusuma
             return events if touch_buffer.nil? || touch_buffer.empty?
           end
 
-          if @touch_buffer.ended? && @last_known_gesture
+          # current gesture ended or even new gesture began
+          if (@touch_buffer.ended? || @touch_buffer.began?) && @last_known_gesture
             events << create_event(record: @last_known_gesture.record.create_index_record(status: 'end', trigger: :repeat)) if @last_known_gesture.record.repeatable?
             @last_known_gesture = nil
           end

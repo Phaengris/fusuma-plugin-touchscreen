@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'fusuma/plugin/events/records/record'
+
 module Fusuma
   module Plugin
     module Events

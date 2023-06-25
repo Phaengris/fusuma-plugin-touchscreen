@@ -8,6 +8,7 @@ module Fusuma
       module Records
         module TouchRecords
           class SwipeRecord < Base
+            attr_reader :direction
 
             def initialize(direction:, **args)
               super(**args)
@@ -16,6 +17,10 @@ module Fusuma
 
             def repeatable?
               true
+            end
+
+            def ==(other)
+              super(other) && direction == other.direction
             end
 
             protected

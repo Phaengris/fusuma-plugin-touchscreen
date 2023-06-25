@@ -3,6 +3,9 @@ module Fusuma
     module Detectors
       module TouchDetectors
         class Base
+          def detect
+            raise NotImplementedError, "override #{self.class.name}##{__method__}"
+          end
 
           protected
 

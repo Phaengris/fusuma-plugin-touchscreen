@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'fusuma/plugin/events/records/record'
+
 require_relative './touch_records/tap_record'
 require_relative './touch_records/hold_record'
 require_relative './touch_records/swipe_record'

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require './lib/fusuma/plugin/devices/touchscreen_device'
+require 'fusuma/plugin/devices/touchscreen_device'
 
 module Fusuma
   RSpec.describe Plugin::Touchscreen::DevicePatch do
@@ -21,13 +21,15 @@ module Fusuma
     # that's the only touchscreen device I have :)
     context 'Microsoft Surface 3 Pro' do
       let(:list_devices_output) do
-        File.open("./spec/fixtures/libinput-list-devices_ms-surface-3-pro.txt")
+        File.open("./spec/samples/libinput-list-devices.txt")
       end
 
-      it 'detects Microsoft Surface 3 Pro touchscreen' do
+      it 'detects touchscreen' do
         expect(Device.available.map(&:name)).to include 'NTRG0001:01 1B96:1B05'
       end
     end
+
+    # TODO: create a test for a dummy device with touch capability
 
   end
 end

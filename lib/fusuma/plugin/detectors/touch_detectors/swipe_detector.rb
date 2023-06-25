@@ -21,17 +21,17 @@ module Fusuma
                 return
               end
             end
-            angle = angles.inject(:+).to_f / angles.size
+            angle = Utils::Angle.average(angles)
 
             MultiLogger.debug('  direction?')
             case angle
-            when 0...(direction_angle_width / 2), (360 - (direction_angle_width / 2))...360
+            when 0..(direction_angle_width / 2), (360 - (direction_angle_width / 2))..360
               direction = :right
-            when (90 - (direction_angle_width / 2))...(90 + (direction_angle_width / 2))
+            when (90 - (direction_angle_width / 2))..(90 + (direction_angle_width / 2))
               direction = :down
-            when (180 - (direction_angle_width / 2))...(180 + (direction_angle_width / 2))
+            when (180 - (direction_angle_width / 2))..(180 + (direction_angle_width / 2))
               direction = :left
-            when (270 - (direction_angle_width / 2))...(270 + (direction_angle_width / 2))
+            when (270 - (direction_angle_width / 2))..(270 + (direction_angle_width / 2))
               direction = :up
             else
               MultiLogger.debug("  !gesture angle of #{angle} does not fall into any direction")

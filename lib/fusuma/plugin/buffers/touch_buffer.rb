@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'fusuma/plugin/buffers/buffer'
+
 module Fusuma
   module Plugin
     module Buffers
@@ -34,24 +36,12 @@ module Fusuma
         end
 
         def events
-          raise "Not supported, use finger_events_map instead"
+          raise NoMethodError, "Not supported, use finger_events_map instead"
         end
 
         def clear_expired(current_time: Time.now)
           @seconds_to_keep ||= (config_params(:seconds_to_keep) || DEFAULT_SECONDS_TO_KEEP)
 
-          # @finger_events_map.each do |finger, events|
-          #   next if events.empty?
-          #
-          #   if events.last.record.status == "end"
-          #     @finger_events_map.delete finger
-          #   else
-          #     @finger_events_map[finger].select! do |e|
-          #       current_time - e.time < @seconds_to_keep
-          #     end
-          #     @finger_events_map.delete finger if @finger_events_map[finger].empty?
-          #   end
-          # end
           clear if ended?
           @finger_events_map.each do |finger, events|
             next if events.empty?
@@ -108,6 +98,7 @@ module Fusuma
           @mem[:end_time] ||= @finger_events_map.values.map { |events| events.last.time }.max
         end
 
+        # { finger => { distance: Float, angle: Float } }
         def finger_movements
           @mem[:finger_movements] ||= @finger_events_map.map do |finger, events|
             position_events = events.select { |e| e.record.position? }
@@ -167,7 +158,16 @@ module Fusuma
                 distance = (last_position.record.x_mm - first_position.record.x_mm).abs
               else
                 angle = (Math.atan(k) * 180 / Math::PI).round
-                angle += 360 if angle < 0
+                case [direction_x, direction_y]
+                when [1, 1]
+                  angle += 0
+                when [1, -1]
+                  angle += 360
+                when [-1, 1]
+                  angle += 180
+                when [-1, -1]
+                  angle += 180
+                end
                 distance = Math.sqrt((last_position.record.x_mm - first_position.record.x_mm)**2 + (last_position.record.y_mm - first_position.record.y_mm)**2)
               end
               next if distance < jitter_threshold
