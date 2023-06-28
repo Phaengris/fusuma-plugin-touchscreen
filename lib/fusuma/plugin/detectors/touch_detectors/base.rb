@@ -13,6 +13,10 @@ module Fusuma
             0.5 # TODO: configurable
           end
 
+          def jitter_threshold
+            5.0 # TODO: configurable
+          end
+
         end
       end
     end

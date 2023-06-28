@@ -1,5 +1,5 @@
 require_relative './base'
-require_relative '../../../utils/angle'
+require 'fusuma/plugin/touchscreen/math'
 
 module Fusuma
   module Plugin
@@ -16,12 +16,12 @@ module Fusuma
             MultiLogger.debug('  angles?')
             angles = touch_buffer.finger_movements.map { |_, movement| movement[:angle] }
             angles.combination(2).each do |angle1, angle2|
-              if Utils::Angle.difference(angle1, angle2) > movement_angle_threshold
+              if Touchscreen::Math.angles_difference(angle1, angle2) > movement_angle_threshold
                 MultiLogger.debug("  !too much difference between #{angle1} and #{angle2}, not a swipe")
                 return
               end
             end
-            angle = Utils::Angle.average(angles)
+            angle = Touchscreen::Math.angles_average(angles)
 
             MultiLogger.debug('  direction?')
             case angle

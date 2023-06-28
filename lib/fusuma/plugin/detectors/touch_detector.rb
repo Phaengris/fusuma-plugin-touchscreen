@@ -18,13 +18,13 @@ module Fusuma
         def initialize(*)
           super
           @detectors = [
-            Fusuma::Plugin::Detectors::TouchDetectors::TapDetector,
-            Fusuma::Plugin::Detectors::TouchDetectors::SwipeDetector,
-          # Fusuma::Plugin::Detectors::TouchDetectors::PinchDetector,
+            # Fusuma::Plugin::Detectors::TouchDetectors::TapDetector,
+            # Fusuma::Plugin::Detectors::TouchDetectors::SwipeDetector,
+            Fusuma::Plugin::Detectors::TouchDetectors::PinchDetector,
           # Fusuma::Plugin::Detectors::TouchDetectors::RotateDetector,
           # Fusuma::Plugin::Detectors::TouchDetectors::EdgeDetector
           ].map(&:new)
-          @detectors << (@hold_detector = Fusuma::Plugin::Detectors::TouchDetectors::HoldDetector.new)
+          # @detectors << (@hold_detector = Fusuma::Plugin::Detectors::TouchDetectors::HoldDetector.new)
           @last_known_gesture = nil
         end
 
@@ -67,7 +67,7 @@ module Fusuma
             end
           else
             return events if @touch_buffer.empty?
-            gesture_record = @hold_detector.detect(@touch_buffer)
+            # gesture_record = @hold_detector.detect(@touch_buffer)
           end
 
           if gesture_record

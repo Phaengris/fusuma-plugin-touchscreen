@@ -1,0 +1,279 @@
+ event4   TOUCH_DOWN              +0.000s	0 (0) 65.93/49.44 (166.58/82.79mm)
+ event4   TOUCH_DOWN              +0.000s	1 (1) 46.05/58.83 (116.34/98.51mm)
+ event4   TOUCH_FRAME             +0.000s	
+ event4   TOUCH_MOTION            +0.288s	0 (0) 65.93/49.08 (166.58/82.19mm)
+ event4   TOUCH_FRAME             +0.288s	
+ event4   TOUCH_MOTION            +0.298s	0 (0) 65.91/48.83 (166.53/81.77mm)
+ event4   TOUCH_FRAME             +0.298s	
+ event4   TOUCH_MOTION            +0.308s	0 (0) 65.89/48.65 (166.47/81.47mm)
+ event4   TOUCH_MOTION            +0.308s	1 (1) 46.00/59.17 (116.21/99.09mm)
+ event4   TOUCH_FRAME             +0.308s	
+ event4   TOUCH_MOTION            +0.318s	0 (0) 65.88/48.47 (166.45/81.16mm)
+ event4   TOUCH_MOTION            +0.318s	1 (1) 45.93/59.53 (116.05/99.70mm)
+ event4   TOUCH_FRAME             +0.318s	
+ event4   TOUCH_MOTION            +0.328s	0 (0) 65.88/48.28 (166.45/80.86mm)
+ event4   TOUCH_MOTION            +0.328s	1 (1) 45.89/59.84 (115.95/100.21mm)
+ event4   TOUCH_FRAME             +0.328s	
+ event4   TOUCH_MOTION            +0.337s	0 (0) 65.88/48.13 (166.45/80.60mm)
+ event4   TOUCH_MOTION            +0.337s	1 (1) 45.86/60.06 (115.87/100.58mm)
+ event4   TOUCH_FRAME             +0.337s	
+ event4   TOUCH_MOTION            +0.347s	0 (0) 65.87/47.99 (166.42/80.37mm)
+ event4   TOUCH_MOTION            +0.347s	1 (1) 45.82/60.32 (115.76/101.02mm)
+ event4   TOUCH_FRAME             +0.347s	
+ event4   TOUCH_MOTION            +0.357s	0 (0) 65.86/47.87 (166.39/80.16mm)
+ event4   TOUCH_MOTION            +0.357s	1 (1) 45.80/60.62 (115.71/101.51mm)
+ event4   TOUCH_FRAME             +0.357s	
+ event4   TOUCH_MOTION            +0.367s	0 (0) 65.84/47.70 (166.34/79.88mm)
+ event4   TOUCH_MOTION            +0.367s	1 (1) 45.77/60.98 (115.63/102.12mm)
+ event4   TOUCH_FRAME             +0.367s	
+ event4   TOUCH_MOTION            +0.377s	0 (0) 65.82/47.55 (166.29/79.63mm)
+ event4   TOUCH_MOTION            +0.377s	1 (1) 45.72/61.38 (115.53/102.79mm)
+ event4   TOUCH_FRAME             +0.377s	
+ event4   TOUCH_MOTION            +0.387s	0 (0) 65.80/47.41 (166.24/79.40mm)
+ event4   TOUCH_MOTION            +0.387s	1 (1) 45.69/61.73 (115.45/103.37mm)
+ event4   TOUCH_FRAME             +0.387s	
+ event4   TOUCH_MOTION            +0.397s	0 (0) 65.77/47.29 (166.18/79.19mm)
+ event4   TOUCH_MOTION            +0.397s	1 (1) 45.67/62.05 (115.39/103.91mm)
+ event4   TOUCH_FRAME             +0.397s	
+ event4   TOUCH_MOTION            +0.408s	0 (0) 65.75/47.16 (166.13/78.98mm)
+ event4   TOUCH_MOTION            +0.408s	1 (1) 45.66/62.35 (115.37/104.42mm)
+ event4   TOUCH_FRAME             +0.408s	
+ event4   TOUCH_MOTION            +0.416s	0 (0) 65.72/47.01 (166.05/78.72mm)
+ event4   TOUCH_MOTION            +0.416s	1 (1) 45.65/62.62 (115.34/104.86mm)
+ event4   TOUCH_FRAME             +0.416s	
+ event4   TOUCH_MOTION            +0.427s	0 (0) 65.68/46.79 (165.95/78.35mm)
+ event4   TOUCH_MOTION            +0.427s	1 (1) 45.66/62.87 (115.37/105.28mm)
+ event4   TOUCH_FRAME             +0.427s	
+ event4   TOUCH_MOTION            +0.436s	0 (0) 65.65/46.62 (165.87/78.07mm)
+ event4   TOUCH_MOTION            +0.436s	1 (1) 45.66/63.12 (115.37/105.70mm)
+ event4   TOUCH_FRAME             +0.436s	
+ event4   TOUCH_MOTION            +0.446s	0 (0) 65.61/46.42 (165.76/77.74mm)
+ event4   TOUCH_MOTION            +0.446s	1 (1) 45.69/63.34 (115.45/106.07mm)
+ event4   TOUCH_FRAME             +0.446s	
+ event4   TOUCH_MOTION            +0.457s	0 (0) 65.58/46.23 (165.68/77.42mm)
+ event4   TOUCH_MOTION            +0.457s	1 (1) 45.71/63.55 (115.50/106.42mm)
+ event4   TOUCH_FRAME             +0.457s	
+ event4   TOUCH_MOTION            +0.467s	0 (0) 65.53/46.06 (165.58/77.14mm)
+ event4   TOUCH_MOTION            +0.467s	1 (1) 45.75/63.76 (115.58/106.77mm)
+ event4   TOUCH_FRAME             +0.467s	
+ event4   TOUCH_MOTION            +0.477s	0 (0) 65.49/45.90 (165.47/76.86mm)
+ event4   TOUCH_MOTION            +0.477s	1 (1) 45.81/64.05 (115.74/107.26mm)
+ event4   TOUCH_FRAME             +0.477s	
+ event4   TOUCH_MOTION            +0.487s	0 (0) 65.43/45.70 (165.32/76.53mm)
+ event4   TOUCH_MOTION            +0.487s	1 (1) 45.88/64.32 (115.92/107.72mm)
+ event4   TOUCH_FRAME             +0.487s	
+ event4   TOUCH_MOTION            +0.496s	0 (0) 65.37/45.47 (165.16/76.14mm)
+ event4   TOUCH_MOTION            +0.496s	1 (1) 45.95/64.63 (116.11/108.23mm)
+ event4   TOUCH_FRAME             +0.496s	
+ event4   TOUCH_MOTION            +0.506s	0 (0) 65.32/45.30 (165.03/75.86mm)
+ event4   TOUCH_MOTION            +0.506s	1 (1) 46.07/65.06 (116.39/108.95mm)
+ event4   TOUCH_FRAME             +0.506s	
+ event4   TOUCH_MOTION            +0.516s	0 (0) 65.26/45.15 (164.89/75.60mm)
+ event4   TOUCH_MOTION            +0.516s	1 (1) 46.16/65.41 (116.63/109.53mm)
+ event4   TOUCH_FRAME             +0.516s	
+ event4   TOUCH_MOTION            +0.526s	0 (0) 65.21/44.97 (164.76/75.30mm)
+ event4   TOUCH_MOTION            +0.526s	1 (1) 46.23/65.70 (116.82/110.02mm)
+ event4   TOUCH_FRAME             +0.526s	
+ event4   TOUCH_MOTION            +0.536s	0 (0) 65.15/44.76 (164.61/74.95mm)
+ event4   TOUCH_MOTION            +0.536s	1 (1) 46.30/65.94 (116.97/110.42mm)
+ event4   TOUCH_FRAME             +0.536s	
+ event4   TOUCH_MOTION            +0.546s	0 (0) 65.09/44.58 (164.45/74.65mm)
+ event4   TOUCH_MOTION            +0.546s	1 (1) 46.34/66.13 (117.08/110.74mm)
+ event4   TOUCH_FRAME             +0.546s	
+ event4   TOUCH_MOTION            +0.556s	0 (0) 64.98/44.33 (164.18/74.23mm)
+ event4   TOUCH_MOTION            +0.556s	1 (1) 46.38/66.30 (117.18/111.02mm)
+ event4   TOUCH_FRAME             +0.556s	
+ event4   TOUCH_MOTION            +0.567s	0 (0) 64.88/44.10 (163.92/73.86mm)
+ event4   TOUCH_MOTION            +0.567s	1 (1) 46.42/66.44 (117.29/111.26mm)
+ event4   TOUCH_FRAME             +0.567s	
+ event4   TOUCH_MOTION            +0.576s	0 (0) 64.76/43.84 (163.63/73.42mm)
+ event4   TOUCH_MOTION            +0.576s	1 (1) 46.44/66.55 (117.34/111.44mm)
+ event4   TOUCH_FRAME             +0.576s	
+ event4   TOUCH_MOTION            +0.586s	0 (0) 64.62/43.59 (163.26/73.00mm)
+ event4   TOUCH_MOTION            +0.586s	1 (1) 46.47/66.69 (117.42/111.67mm)
+ event4   TOUCH_FRAME             +0.586s	
+ event4   TOUCH_MOTION            +0.595s	0 (0) 64.42/43.22 (162.76/72.37mm)
+ event4   TOUCH_MOTION            +0.595s	1 (1) 46.50/66.85 (117.47/111.95mm)
+ event4   TOUCH_FRAME             +0.595s	
+ event4   TOUCH_MOTION            +0.606s	0 (0) 64.22/42.92 (162.26/71.88mm)
+ event4   TOUCH_MOTION            +0.606s	1 (1) 46.52/66.99 (117.53/112.19mm)
+ event4   TOUCH_FRAME             +0.606s	
+ event4   TOUCH_MOTION            +0.616s	0 (0) 64.06/42.67 (161.84/71.47mm)
+ event4   TOUCH_MOTION            +0.616s	1 (1) 46.54/67.09 (117.58/112.35mm)
+ event4   TOUCH_FRAME             +0.616s	
+ event4   TOUCH_MOTION            +0.626s	0 (0) 63.89/42.41 (161.42/71.02mm)
+ event4   TOUCH_MOTION            +0.626s	1 (1) 46.55/67.20 (117.61/112.53mm)
+ event4   TOUCH_FRAME             +0.626s	
+ event4   TOUCH_MOTION            +0.636s	0 (0) 63.72/42.17 (161.00/70.63mm)
+ event4   TOUCH_MOTION            +0.636s	1 (1) 46.57/67.42 (117.66/112.91mm)
+ event4   TOUCH_FRAME             +0.636s	
+ event4   TOUCH_MOTION            +0.646s	0 (0) 63.52/41.90 (160.50/70.16mm)
+ event4   TOUCH_MOTION            +0.646s	1 (1) 46.59/67.57 (117.71/113.16mm)
+ event4   TOUCH_FRAME             +0.646s	
+ event4   TOUCH_MOTION            +0.656s	0 (0) 63.26/41.49 (159.84/69.49mm)
+ event4   TOUCH_MOTION            +0.656s	1 (1) 46.60/67.66 (117.74/113.30mm)
+ event4   TOUCH_FRAME             +0.656s	
+ event4   TOUCH_MOTION            +0.666s	0 (0) 62.96/41.08 (159.08/68.79mm)
+ event4   TOUCH_MOTION            +0.666s	1 (1) 46.60/67.73 (117.74/113.42mm)
+ event4   TOUCH_FRAME             +0.666s	
+ event4   TOUCH_MOTION            +0.675s	0 (0) 62.66/40.63 (158.32/68.05mm)
+ event4   TOUCH_MOTION            +0.675s	1 (1) 46.61/67.78 (117.76/113.51mm)
+ event4   TOUCH_FRAME             +0.675s	
+ event4   TOUCH_MOTION            +0.685s	0 (0) 62.37/40.23 (157.58/67.37mm)
+ event4   TOUCH_MOTION            +0.685s	1 (1) 46.61/67.84 (117.76/113.60mm)
+ event4   TOUCH_FRAME             +0.685s	
+ event4   TOUCH_MOTION            +0.695s	0 (0) 62.02/39.88 (156.71/66.79mm)
+ event4   TOUCH_MOTION            +0.695s	1 (1) 46.62/67.89 (117.79/113.70mm)
+ event4   TOUCH_FRAME             +0.695s	
+ event4   TOUCH_MOTION            +0.705s	0 (0) 61.63/39.48 (155.71/66.12mm)
+ event4   TOUCH_MOTION            +0.705s	1 (1) 46.64/67.99 (117.84/113.86mm)
+ event4   TOUCH_FRAME             +0.705s	
+ event4   TOUCH_MOTION            +0.715s	0 (0) 61.21/39.12 (154.66/65.51mm)
+ event4   TOUCH_MOTION            +0.715s	1 (1) 46.65/68.09 (117.87/114.02mm)
+ event4   TOUCH_FRAME             +0.715s	
+ event4   TOUCH_MOTION            +0.726s	0 (0) 60.82/38.80 (153.66/64.98mm)
+ event4   TOUCH_MOTION            +0.726s	1 (1) 46.67/68.18 (117.92/114.19mm)
+ event4   TOUCH_FRAME             +0.726s	
+ event4   TOUCH_MOTION            +0.735s	0 (0) 60.46/38.52 (152.76/64.51mm)
+ event4   TOUCH_MOTION            +0.735s	1 (1) 46.69/68.30 (117.97/114.37mm)
+ event4   TOUCH_FRAME             +0.735s	
+ event4   TOUCH_MOTION            +0.745s	0 (0) 60.12/38.23 (151.89/64.02mm)
+ event4   TOUCH_MOTION            +0.745s	1 (1) 46.70/68.39 (118.00/114.53mm)
+ event4   TOUCH_FRAME             +0.745s	
+ event4   TOUCH_MOTION            +0.754s	0 (0) 59.79/37.94 (151.05/63.53mm)
+ event4   TOUCH_MOTION            +0.754s	1 (1) 46.72/68.48 (118.05/114.67mm)
+ event4   TOUCH_FRAME             +0.754s	
+ event4   TOUCH_MOTION            +0.765s	0 (0) 59.40/37.55 (150.08/62.88mm)
+ event4   TOUCH_MOTION            +0.765s	1 (1) 46.76/68.56 (118.13/114.81mm)
+ event4   TOUCH_FRAME             +0.765s	
+ event4   TOUCH_MOTION            +0.775s	0 (0) 58.96/37.12 (148.97/62.16mm)
+ event4   TOUCH_MOTION            +0.775s	1 (1) 46.78/68.64 (118.18/114.95mm)
+ event4   TOUCH_FRAME             +0.775s	
+ event4   TOUCH_MOTION            +0.785s	0 (0) 58.65/36.84 (148.18/61.70mm)
+ event4   TOUCH_MOTION            +0.785s	1 (1) 46.83/68.71 (118.32/115.07mm)
+ event4   TOUCH_FRAME             +0.785s	
+ event4   TOUCH_MOTION            +0.795s	0 (0) 58.25/36.47 (147.18/61.07mm)
+ event4   TOUCH_MOTION            +0.795s	1 (1) 46.90/68.84 (118.50/115.28mm)
+ event4   TOUCH_FRAME             +0.795s	
+ event4   TOUCH_MOTION            +0.805s	0 (0) 57.88/36.16 (146.24/60.56mm)
+ event4   TOUCH_MOTION            +0.805s	1 (1) 47.02/68.98 (118.79/115.51mm)
+ event4   TOUCH_FRAME             +0.805s	
+ event4   TOUCH_MOTION            +0.814s	0 (0) 57.46/35.81 (145.18/59.98mm)
+ event4   TOUCH_MOTION            +0.814s	1 (1) 47.16/69.12 (119.16/115.74mm)
+ event4   TOUCH_FRAME             +0.814s	
+ event4   TOUCH_MOTION            +0.825s	0 (0) 57.01/35.51 (144.05/59.47mm)
+ event4   TOUCH_MOTION            +0.825s	1 (1) 47.32/69.24 (119.55/115.95mm)
+ event4   TOUCH_FRAME             +0.825s	
+ event4   TOUCH_MOTION            +0.833s	0 (0) 56.70/35.29 (143.26/59.09mm)
+ event4   TOUCH_MOTION            +0.833s	1 (1) 47.46/69.38 (119.92/116.19mm)
+ event4   TOUCH_FRAME             +0.833s	
+ event4   TOUCH_MOTION            +0.844s	0 (0) 56.44/35.11 (142.61/58.79mm)
+ event4   TOUCH_MOTION            +0.844s	1 (1) 47.64/69.48 (120.37/116.35mm)
+ event4   TOUCH_FRAME             +0.844s	
+ event4   TOUCH_MOTION            +0.854s	0 (0) 56.11/34.88 (141.76/58.42mm)
+ event4   TOUCH_MOTION            +0.854s	1 (1) 47.77/69.56 (120.68/116.49mm)
+ event4   TOUCH_FRAME             +0.854s	
+ event4   TOUCH_MOTION            +0.864s	0 (0) 55.85/34.72 (141.11/58.14mm)
+ event4   TOUCH_MOTION            +0.864s	1 (1) 47.91/69.62 (121.05/116.58mm)
+ event4   TOUCH_FRAME             +0.864s	
+ event4   TOUCH_MOTION            +0.874s	0 (0) 55.53/34.50 (140.29/57.77mm)
+ event4   TOUCH_MOTION            +0.874s	1 (1) 48.05/69.66 (121.39/116.65mm)
+ event4   TOUCH_FRAME             +0.874s	
+ event4   TOUCH_MOTION            +0.885s	0 (0) 55.29/34.37 (139.68/57.56mm)
+ event4   TOUCH_MOTION            +0.885s	1 (1) 48.19/69.70 (121.76/116.72mm)
+ event4   TOUCH_FRAME             +0.885s	
+ event4   TOUCH_MOTION            +0.894s	0 (0) 55.05/34.25 (139.08/57.35mm)
+ event4   TOUCH_MOTION            +0.894s	1 (1) 48.39/69.75 (122.26/116.81mm)
+ event4   TOUCH_FRAME             +0.894s	
+ event4   TOUCH_MOTION            +0.903s	0 (0) 54.82/34.11 (138.50/57.12mm)
+ event4   TOUCH_MOTION            +0.903s	1 (1) 48.58/69.81 (122.74/116.91mm)
+ event4   TOUCH_FRAME             +0.903s	
+ event4   TOUCH_MOTION            +0.913s	0 (0) 54.60/34.00 (137.95/56.93mm)
+ event4   TOUCH_MOTION            +0.913s	1 (1) 48.76/69.87 (123.18/117.00mm)
+ event4   TOUCH_FRAME             +0.913s	
+ event4   TOUCH_MOTION            +0.923s	0 (0) 54.34/33.83 (137.29/56.65mm)
+ event4   TOUCH_MOTION            +0.923s	1 (1) 48.92/69.93 (123.61/117.12mm)
+ event4   TOUCH_FRAME             +0.923s	
+ event4   TOUCH_MOTION            +0.933s	0 (0) 54.07/33.66 (136.61/56.37mm)
+ event4   TOUCH_MOTION            +0.933s	1 (1) 49.09/69.98 (124.03/117.19mm)
+ event4   TOUCH_FRAME             +0.933s	
+ event4   TOUCH_MOTION            +0.944s	0 (0) 53.88/33.56 (136.13/56.21mm)
+ event4   TOUCH_MOTION            +0.944s	1 (1) 49.24/70.03 (124.42/117.28mm)
+ event4   TOUCH_FRAME             +0.944s	
+ event4   TOUCH_MOTION            +0.953s	0 (0) 53.73/33.50 (135.76/56.09mm)
+ event4   TOUCH_MOTION            +0.953s	1 (1) 49.45/70.09 (124.95/117.37mm)
+ event4   TOUCH_FRAME             +0.953s	
+ event4   TOUCH_MOTION            +0.964s	0 (0) 53.62/33.45 (135.47/56.02mm)
+ event4   TOUCH_MOTION            +0.964s	1 (1) 49.71/70.16 (125.61/117.49mm)
+ event4   TOUCH_FRAME             +0.964s	
+ event4   TOUCH_MOTION            +0.973s	0 (0) 53.50/33.41 (135.18/55.95mm)
+ event4   TOUCH_MOTION            +0.973s	1 (1) 49.97/70.21 (126.26/117.58mm)
+ event4   TOUCH_FRAME             +0.973s	
+ event4   TOUCH_MOTION            +0.983s	0 (0) 53.42/33.40 (134.97/55.93mm)
+ event4   TOUCH_MOTION            +0.983s	1 (1) 50.23/70.28 (126.92/117.70mm)
+ event4   TOUCH_FRAME             +0.983s	
+ event4   TOUCH_MOTION            +0.992s	0 (0) 53.31/33.38 (134.68/55.91mm)
+ event4   TOUCH_MOTION            +0.992s	1 (1) 50.43/70.32 (127.42/117.77mm)
+ event4   TOUCH_FRAME             +0.992s	
+ event4   TOUCH_MOTION            +1.003s	0 (0) 53.21/33.37 (134.45/55.88mm)
+ event4   TOUCH_MOTION            +1.003s	1 (1) 50.63/70.37 (127.92/117.84mm)
+ event4   TOUCH_FRAME             +1.003s	
+ event4   TOUCH_MOTION            +1.013s	0 (0) 53.11/33.34 (134.18/55.84mm)
+ event4   TOUCH_MOTION            +1.013s	1 (1) 50.78/70.41 (128.29/117.91mm)
+ event4   TOUCH_FRAME             +1.013s	
+ event4   TOUCH_MOTION            +1.023s	0 (0) 53.00/33.33 (133.92/55.81mm)
+ event4   TOUCH_MOTION            +1.023s	1 (1) 50.92/70.43 (128.66/117.95mm)
+ event4   TOUCH_FRAME             +1.023s	
+ event4   TOUCH_MOTION            +1.033s	0 (0) 52.89/33.29 (133.63/55.74mm)
+ event4   TOUCH_MOTION            +1.033s	1 (1) 51.05/70.46 (128.97/118.00mm)
+ event4   TOUCH_FRAME             +1.033s	
+ event4   TOUCH_MOTION            +1.044s	0 (0) 52.69/33.26 (133.13/55.70mm)
+ event4   TOUCH_MOTION            +1.044s	1 (1) 51.15/70.48 (129.24/118.02mm)
+ event4   TOUCH_FRAME             +1.044s	
+ event4   TOUCH_MOTION            +1.052s	0 (0) 52.54/33.25 (132.74/55.67mm)
+ event4   TOUCH_MOTION            +1.052s	1 (1) 51.27/70.50 (129.53/118.07mm)
+ event4   TOUCH_FRAME             +1.052s	
+ event4   TOUCH_MOTION            +1.063s	0 (0) 52.40/33.22 (132.39/55.63mm)
+ event4   TOUCH_MOTION            +1.063s	1 (1) 51.36/70.52 (129.76/118.09mm)
+ event4   TOUCH_FRAME             +1.063s	
+ event4   TOUCH_MOTION            +1.072s	0 (0) 52.27/33.18 (132.05/55.56mm)
+ event4   TOUCH_MOTION            +1.072s	1 (1) 51.43/70.53 (129.95/118.12mm)
+ event4   TOUCH_FRAME             +1.072s	
+ event4   TOUCH_MOTION            +1.082s	0 (0) 52.15/33.15 (131.76/55.51mm)
+ event4   TOUCH_MOTION            +1.082s	1 (1) 51.49/70.53 (130.11/118.12mm)
+ event4   TOUCH_FRAME             +1.082s	
+ event4   TOUCH_MOTION            +1.093s	0 (0) 52.05/33.13 (131.50/55.49mm)
+ event4   TOUCH_MOTION            +1.093s	1 (1) 51.55/70.55 (130.24/118.14mm)
+ event4   TOUCH_FRAME             +1.093s	
+ event4   TOUCH_MOTION            +1.103s	0 (0) 51.92/33.09 (131.18/55.42mm)
+ event4   TOUCH_MOTION            +1.103s	1 (1) 51.58/70.55 (130.32/118.14mm)
+ event4   TOUCH_FRAME             +1.103s	
+ event4   TOUCH_MOTION            +1.112s	0 (0) 51.79/33.06 (130.84/55.37mm)
+ event4   TOUCH_MOTION            +1.112s	1 (1) 51.60/70.55 (130.37/118.14mm)
+ event4   TOUCH_FRAME             +1.112s	
+ event4   TOUCH_MOTION            +1.123s	0 (0) 51.65/33.04 (130.50/55.33mm)
+ event4   TOUCH_MOTION            +1.123s	1 (1) 51.61/70.56 (130.39/118.16mm)
+ event4   TOUCH_FRAME             +1.123s	
+ event4   TOUCH_MOTION            +1.132s	0 (0) 51.53/33.01 (130.18/55.28mm)
+ event4   TOUCH_FRAME             +1.132s	
+ event4   TOUCH_MOTION            +1.142s	0 (0) 51.41/32.98 (129.89/55.23mm)
+ event4   TOUCH_FRAME             +1.142s	
+ event4   TOUCH_MOTION            +1.151s	0 (0) 51.30/32.95 (129.61/55.19mm)
+ event4   TOUCH_FRAME             +1.151s	
+ event4   TOUCH_MOTION            +1.162s	0 (0) 51.19/32.91 (129.34/55.12mm)
+ event4   TOUCH_FRAME             +1.162s	
+ event4   TOUCH_MOTION            +1.172s	0 (0) 51.11/32.88 (129.13/55.07mm)
+ event4   TOUCH_FRAME             +1.172s	
+ event4   TOUCH_MOTION            +1.182s	0 (0) 51.04/32.86 (128.95/55.02mm)
+ event4   TOUCH_FRAME             +1.182s	
+ event4   TOUCH_MOTION            +1.192s	0 (0) 50.97/32.84 (128.79/55.00mm)
+ event4   TOUCH_FRAME             +1.192s	
+ event4   TOUCH_MOTION            +1.202s	0 (0) 50.90/32.83 (128.61/54.98mm)
+ event4   TOUCH_FRAME             +1.202s	
+ event4   TOUCH_MOTION            +1.211s	0 (0) 50.83/32.84 (128.42/55.00mm)
+ event4   TOUCH_FRAME             +1.211s	
+ event4   TOUCH_MOTION            +1.221s	0 (0) 50.79/32.86 (128.32/55.02mm)
+ event4   TOUCH_FRAME             +1.221s	
+ event4   TOUCH_UP                +1.261s	0 (0)
+ event4   TOUCH_UP                +1.261s	1 (1)
+ event4   TOUCH_FRAME             +1.261s	

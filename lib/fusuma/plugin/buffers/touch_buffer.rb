@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fusuma/plugin/buffers/buffer'
+require 'fusuma/plugin/touchscreen/math'
 
 module Fusuma
   module Plugin
@@ -79,7 +80,7 @@ module Fusuma
 
         def moved?
           # TODO: a quicker way to do this?
-          @mem[:moved] ||= finger_movements.any? && finger_movements.all? { |finger, movement| movement[:distance] > jitter_threshold }
+          @mem[:moved] ||= @finger_events_map.any? && @finger_events_map.keys.all? { |finger| finger_movements.key?(finger) }
         end
 
         def duration
@@ -144,7 +145,7 @@ module Fusuma
                 else
                   throw(:interrupted_movement) unless jitter_x || (delta_x <=> 0) == direction_x
                   throw(:interrupted_movement) unless jitter_y || (delta_y <=> 0) == direction_y
-                  throw(:interrupted_movement) unless (position.record.y_mm - k * position.record.x_mm - b).abs < jitter_threshold
+                  throw(:interrupted_movement) unless Touchscreen::Math.distance_from_line(position.record.x_mm, position.record.y_mm, k, b) < jitter_threshold
                 end
                 prev_position = position
               end
@@ -172,7 +173,15 @@ module Fusuma
               end
               next if distance < jitter_threshold
 
-              [finger, { angle: angle, distance: distance }]
+              [
+                finger,
+                {
+                  angle: angle,
+                  distance: distance,
+                  first_position: { x: first_position.record.x_mm, y: first_position.record.y_mm },
+                  last_position: { x: last_position.record.x_mm, y: last_position.record.y_mm }
+                }
+              ]
             end
           end.compact.to_h
         end
