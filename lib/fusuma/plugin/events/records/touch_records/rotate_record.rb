@@ -8,14 +8,14 @@ module Fusuma
     module Events
       module Records
         module TouchRecords
-          class SwipeRecord < Base
+          class RotateRecord < Base
             prepend Features::Direction
 
             def repeatable?
               true
             end
 
-          end # class SwipeRecord
+          end # class RotateRecord
         end
       end
     end

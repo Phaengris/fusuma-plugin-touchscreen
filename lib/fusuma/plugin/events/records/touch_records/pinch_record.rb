@@ -1,4 +1,5 @@
 require_relative './base'
+require_relative './features/direction'
 
 # frozen_string_literal: true
 
@@ -8,28 +9,13 @@ module Fusuma
       module Records
         module TouchRecords
           class PinchRecord < Base
-            attr_reader :direction
-
-            def initialize(direction:, **args)
-              super(**args)
-              @direction = direction.to_s
-            end
+            prepend Features::Direction
 
             def repeatable?
               true
             end
 
-            def ==(other)
-              super(other) && direction == other.direction
-            end
-
-            protected
-
-            def config_index_keys
-              super << Config::Index::Key.new(@direction)
-            end
-
-          end # class SwipeRecord
+          end # class PinchRecord
         end
       end
     end

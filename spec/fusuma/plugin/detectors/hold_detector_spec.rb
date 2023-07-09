@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'timecop'
 require 'fusuma/plugin/events/event'
 require 'fusuma/plugin/parsers/touch_parser'
 require 'fusuma/plugin/buffers/touch_buffer'
@@ -8,30 +9,43 @@ require 'fusuma/plugin/events/records/touch_records/hold_record'
 module Fusuma
   RSpec.describe Plugin::Detectors::TouchDetectors::HoldDetector do
     subject { described_class.new }
-
-    let(:touch_buffer) { double('touch_buffer') }
+    let(:touch_buffer) { Plugin::Buffers::TouchBuffer.new }
+    let(:t) { Time.now }
 
     before do
-      allow(touch_buffer).to receive(:tap_hold_threshold).and_return(0.5)
+      allow(touch_buffer).to receive(:movement_threshold).and_return(0.5)
+      allow(subject).to receive(:tap_hold_threshold).and_return(0.5)
+      allow(subject).to receive(:jitter_threshold).and_return(5.0)
     end
 
-    it 'detects hold' do
-      allow(touch_buffer).to receive(:moved?).and_return(false)
-      allow(touch_buffer).to receive(:duration).and_return(0.6)
-      allow(touch_buffer).to receive(:finger).and_return(1)
-
-      expect(subject.detect(touch_buffer)).to be_a(Plugin::Events::Records::TouchRecords::HoldRecord)
+    it 'no events' do
+      expect(subject.detect(touch_buffer)).to be nil
     end
 
-    it 'does not detect hold if touch_buffer.moved?' do
-      allow(touch_buffer).to receive(:moved?).and_return(true)
+    it 'under tap_hold_threshold' do
+      touch_buffer.buffer(generate_touch_event(time: t - 0.1, record: generate_touch_record(status: 'begin', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'update', finger: 1, x_mm: 10, y_mm: 10)))
 
       expect(subject.detect(touch_buffer)).to be nil
     end
 
-    it 'does not detect hold if gesture duration is under tap_hold_threshold' do
-      allow(touch_buffer).to receive(:moved?).and_return(false)
-      allow(touch_buffer).to receive(:duration).and_return(0.4)
+    it 'not moved' do
+      touch_buffer.buffer(generate_touch_event(time: t - 1, record: generate_touch_record(status: 'begin', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'update', finger: 1, x_mm: 10, y_mm: 10)))
+
+      expect(subject.detect(touch_buffer)).to be_a(Plugin::Events::Records::TouchRecords::HoldRecord)
+    end
+
+    it 'moved under jitter_threshold' do
+      touch_buffer.buffer(generate_touch_event(time: t - 1, record: generate_touch_record(status: 'begin', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'update', finger: 1, x_mm: 10, y_mm: 15)))
+
+      expect(subject.detect(touch_buffer)).to be_a(Plugin::Events::Records::TouchRecords::HoldRecord)
+    end
+
+    it 'moved more than jitter_threshold' do
+      touch_buffer.buffer(generate_touch_event(time: t - 1, record: generate_touch_record(status: 'begin', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'update', finger: 1, x_mm: 10, y_mm: 20)))
 
       expect(subject.detect(touch_buffer)).to be nil
     end

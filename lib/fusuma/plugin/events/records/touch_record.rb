@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'fusuma/plugin/events/records/record'
 
 require_relative './touch_records/tap_record'
@@ -32,6 +30,19 @@ module Fusuma
 
           def position?
             @x_px || @y_px
+          end
+
+          def inspect
+            s = "#{self.class} status: #{status} finger: #{finger} time offset: #{time_offset}"
+            s << " x_px: #{x_px}" if x_px
+            s << " y_px: #{y_px}" if y_px
+            s << " x_mm: #{x_mm}" if x_mm
+            s << " y_mm: #{y_mm}" if y_mm
+            s
+          end
+
+          def to_s
+            inspect
           end
         end
       end

@@ -7,52 +7,62 @@ require 'fusuma/plugin/events/records/touch_records/tap_record'
 
 module Fusuma
   RSpec.describe Plugin::Detectors::TouchDetectors::TapDetector do
+    include_context 'with touch buffer'
     subject { described_class.new }
 
-    let(:touch_buffer) { double('touch_buffer') }
-
     before do
-      allow(touch_buffer).to receive(:tap_hold_threshold).and_return(0.5)
+      allow(touch_buffer).to receive(:movement_threshold).and_return(0.5)
+      allow(subject).to receive(:tap_hold_threshold).and_return(0.5)
+      allow(subject).to receive(:jitter_threshold).and_return(5.0)
     end
 
-    it 'detects tap' do
-      allow(touch_buffer).to receive(:moved?).and_return(false)
-      allow(touch_buffer).to receive(:began?).and_return(true)
-      allow(touch_buffer).to receive(:ended?).and_return(true)
-      allow(touch_buffer).to receive(:duration).and_return(0.1)
-      allow(touch_buffer).to receive(:finger).and_return(1)
+    it 'no events' do
+      expect(subject.detect(touch_buffer)).to be nil
+    end
+
+    it 'not began in this cycle' do
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'update', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'end', finger: 1)))
+
+      expect(subject.detect(touch_buffer)).to be nil
+    end
+
+    it 'not ended in this cycle' do
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'begin', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'update', finger: 1, x_mm: 10, y_mm: 10)))
+
+      expect(subject.detect(touch_buffer)).to be nil
+    end
+
+    it 'moved too much' do
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'begin', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'update', finger: 1, x_mm: 20, y_mm: 20)))
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'end', finger: 1)))
+
+      expect(subject.detect(touch_buffer)).to be nil
+    end
+
+    it 'too long' do
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'begin', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t + 0.6, record: generate_touch_record(status: 'end', finger: 1)))
+
+      expect(subject.detect(touch_buffer)).to be nil
+    end
+
+    it 'not moved' do
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'begin', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t + 0.1, record: generate_touch_record(status: 'end', finger: 1)))
+      pp touch_buffer.finger_movements
 
       expect(subject.detect(touch_buffer)).to be_a(Plugin::Events::Records::TouchRecords::TapRecord)
     end
 
-    it 'does not detect tap if touch_buffer.moved?' do
-      allow(touch_buffer).to receive(:moved?).and_return(true)
+    it 'moved under jitter threshold' do
+      touch_buffer.buffer(generate_touch_event(time: t, record: generate_touch_record(status: 'begin', finger: 1, x_mm: 10, y_mm: 10)))
+      touch_buffer.buffer(generate_touch_event(time: t + 0.1, record: generate_touch_record(status: 'update', finger: 1, x_mm: 10.1, y_mm: 10.1)))
+      touch_buffer.buffer(generate_touch_event(time: t + 0.2, record: generate_touch_record(status: 'end', finger: 1)))
 
-      expect(subject.detect(touch_buffer)).to be nil
-    end
-
-    it 'does not detect tap if gesture not began in this cycle' do
-      allow(touch_buffer).to receive(:moved?).and_return(false)
-      allow(touch_buffer).to receive(:began?).and_return(false)
-
-      expect(subject.detect(touch_buffer)).to be nil
-    end
-
-    it 'does not detect tap if gesture not ended in this cycle' do
-      allow(touch_buffer).to receive(:moved?).and_return(false)
-      allow(touch_buffer).to receive(:began?).and_return(true)
-      allow(touch_buffer).to receive(:ended?).and_return(false)
-
-      expect(subject.detect(touch_buffer)).to be nil
-    end
-
-    it 'does not detect tap if gesture duration is over tap_hold_threshold' do
-      allow(touch_buffer).to receive(:moved?).and_return(false)
-      allow(touch_buffer).to receive(:began?).and_return(true)
-      allow(touch_buffer).to receive(:ended?).and_return(true)
-      allow(touch_buffer).to receive(:duration).and_return(1.0)
-
-      expect(subject.detect(touch_buffer)).to be nil
+      expect(subject.detect(touch_buffer)).to be_a(Plugin::Events::Records::TouchRecords::TapRecord)
     end
 
     it 'works on real data' do

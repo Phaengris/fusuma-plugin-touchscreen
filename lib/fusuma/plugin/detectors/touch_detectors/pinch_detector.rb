@@ -17,19 +17,9 @@ module Fusuma
             return unless touch_buffer.finger_movements.size >= 2
 
             MultiLogger.debug('  distance change between first 2 fingers?')
-            first_finger, second_finger = touch_buffer.finger_movements.values_at(0, 1)
-            begin_distance = Touchscreen::Math.distance(
-              first_finger[:first_position][:x],
-              first_finger[:first_position][:y],
-              second_finger[:first_position][:x],
-              second_finger[:first_position][:y]
-            )
-            end_distance = Touchscreen::Math.distance(
-              first_finger[:last_position][:x],
-              first_finger[:last_position][:y],
-              second_finger[:last_position][:x],
-              second_finger[:last_position][:y]
-            )
+            first_finger, second_finger = touch_buffer.finger_movements.values[0..1]
+            begin_distance = Touchscreen::Math.distance(first_finger[:first_position], second_finger[:first_position])
+            end_distance = Touchscreen::Math.distance(first_finger[:last_position], second_finger[:last_position])
             distance = end_distance - begin_distance
             return unless distance.abs > jitter_threshold
 
@@ -39,17 +29,14 @@ module Fusuma
               pairs = touch_buffer.finger_movements.keys.combination(2).to_a
               pairs.each do |finger1, finger2|
                 begin_distance = Touchscreen::Math.distance(
-                  touch_buffer.finger_movements[finger1][:first_position][:x],
-                  touch_buffer.finger_movements[finger1][:first_position][:y],
-                  touch_buffer.finger_movements[finger2][:first_position][:x],
-                  touch_buffer.finger_movements[finger2][:first_position][:y]
+                  touch_buffer.finger_movements[finger1][:first_position],
+                  touch_buffer.finger_movements[finger2][:first_position]
                 )
                 end_distance = Touchscreen::Math.distance(
-                  touch_buffer.finger_movements[finger1][:last_position][:x],
-                  touch_buffer.finger_movements[finger1][:last_position][:y],
-                  touch_buffer.finger_movements[finger2][:last_position][:x],
-                  touch_buffer.finger_movements[finger2][:last_position][:y]
+                  touch_buffer.finger_movements[finger1][:last_position],
+                  touch_buffer.finger_movements[finger2][:last_position]
                 )
+                MultiLogger.debug("  fingers #{finger1} and #{finger2} moved from #{begin_distance} to #{end_distance}")
                 this_distance = end_distance - begin_distance
                 if this_distance.abs < jitter_threshold
                   MultiLogger.debug("  !distance between fingers #{finger1} and #{finger2} is not changed enough (#{this_distance.abs}), not a pinch")

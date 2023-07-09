@@ -114,29 +114,7 @@ module Fusuma
 
         end
       end
-
     end # context 'gesture detected'
 
-    private
-
-    def generate_touch_record(status: 'begin', time_offset: 1.5, finger: 1, x_px: 49.33, y_px: 47.67, x_mm: 124.63, y_mm: 79.84)
-      Plugin::Events::Records::TouchRecord.new(
-        status: status,
-        time_offset: time_offset,
-        finger: finger,
-        x_px: x_px,
-        y_px: y_px,
-        x_mm: x_mm,
-        y_mm: y_mm
-      )
-    end
-
-    def generate_touch_event(tag: 'libinput_touch_parser', record: generate_touch_record, time: Time.now)
-      Plugin::Events::Event.new(tag: tag, record: record, time: time)
-    end
-
-    def generate_timer_event(time: Time.now)
-      Plugin::Events::Event.new(time: time, tag: "timer_input", record: Plugin::Events::Records::TextRecord.new("timer"))
-    end
   end # describe Plugin::Detectors::TouchDetector
 end

@@ -98,4 +98,12 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
+  config.include Helpers::EventsAndRecords
+end
+
+if ENV['FUSUMA_DEBUG'] == 'true' || ENV['FUSUMA_DEBUG'] == '1'
+  Fusuma::Runner.send(:read_options, {})
+  Fusuma::MultiLogger.instance.debug_mode = true
 end

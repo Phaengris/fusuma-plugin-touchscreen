@@ -20,11 +20,11 @@ module Fusuma
           @detectors = [
             # Fusuma::Plugin::Detectors::TouchDetectors::TapDetector,
             # Fusuma::Plugin::Detectors::TouchDetectors::SwipeDetector,
-            Fusuma::Plugin::Detectors::TouchDetectors::PinchDetector,
-          # Fusuma::Plugin::Detectors::TouchDetectors::RotateDetector,
+            # Fusuma::Plugin::Detectors::TouchDetectors::PinchDetector,
+            # Fusuma::Plugin::Detectors::TouchDetectors::RotateDetector,
           # Fusuma::Plugin::Detectors::TouchDetectors::EdgeDetector
           ].map(&:new)
-          # @detectors << (@hold_detector = Fusuma::Plugin::Detectors::TouchDetectors::HoldDetector.new)
+          @detectors << (@hold_detector = Fusuma::Plugin::Detectors::TouchDetectors::HoldDetector.new)
           @last_known_gesture = nil
         end
 

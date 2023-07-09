@@ -84,7 +84,9 @@ module Fusuma
         end
 
         def duration
-          @mem[:duration] ||= if ended?
+          @mem[:duration] ||= if @finger_events_map.empty?
+                                0
+                              elsif ended?
                                 end_time - begin_time
                               else
                                 Time.now - begin_time
@@ -99,101 +101,26 @@ module Fusuma
           @mem[:end_time] ||= @finger_events_map.values.map { |events| events.last.time }.max
         end
 
-        # { finger => { distance: Float, angle: Float } }
         def finger_movements
           @mem[:finger_movements] ||= @finger_events_map.map do |finger, events|
             position_events = events.select { |e| e.record.position? }
             next if position_events.size < 2 # we need at least first and last position
 
-            first_position = position_events.first
-            last_position = position_events.last
+            first_position = { x: position_events.first.record.x_mm, y: position_events.first.record.y_mm }
+            last_position = { x: position_events.last.record.x_mm, y: position_events.last.record.y_mm }
+            distance = Touchscreen::Math.distance(first_position, last_position)
+            next if distance < movement_threshold
 
-            case
-            when (first_position.record.x_mm - last_position.record.x_mm).abs < axis_threshold
-              orientation = :vertical
-              direction = (last_position.record.y_mm - first_position.record.y_mm) <=> 0
-              x_axis = (first_position.record.x_mm + last_position.record.x_mm) / 2.0
-            when (first_position.record.y_mm - last_position.record.y_mm).abs < axis_threshold
-              orientation = :horizontal
-              direction = (last_position.record.x_mm - first_position.record.x_mm) <=> 0
-              y_axis = (first_position.record.y_mm + last_position.record.y_mm) / 2.0
-            else
-              orientation = :diagonal
-              k = (first_position.record.y_mm - last_position.record.y_mm) / (first_position.record.x_mm - last_position.record.x_mm)
-              b = first_position.record.y_mm - k * first_position.record.x_mm
-              direction_x = (last_position.record.x_mm - first_position.record.x_mm) <=> 0
-              direction_y = (last_position.record.y_mm - first_position.record.y_mm) <=> 0
-            end
+            # TODO: check if there were trajectory changes in between?
 
-            prev_position = first_position
-            catch(:interrupted_movement) do
-              position_events.each do |position|
-                delta_x = position.record.x_mm - prev_position.record.x_mm
-                delta_y = position.record.y_mm - prev_position.record.y_mm
-
-                jitter_x = delta_x.abs < jitter_threshold
-                jitter_y = delta_y.abs < jitter_threshold
-                next if jitter_x && jitter_y
-
-                case orientation
-                when :vertical
-                  throw(:interrupted_movement) unless jitter_y || (delta_y <=> 0) == direction
-                  throw(:interrupted_movement) unless (position.record.x_mm - x_axis).abs < jitter_threshold
-                when :horizontal
-                  throw(:interrupted_movement) unless jitter_x || (delta_x <=> 0) == direction
-                  throw(:interrupted_movement) unless (position.record.y_mm - y_axis).abs < jitter_threshold
-                else
-                  throw(:interrupted_movement) unless jitter_x || (delta_x <=> 0) == direction_x
-                  throw(:interrupted_movement) unless jitter_y || (delta_y <=> 0) == direction_y
-                  throw(:interrupted_movement) unless Touchscreen::Math.distance_from_line(position.record.x_mm, position.record.y_mm, k, b) < jitter_threshold
-                end
-                prev_position = position
-              end
-
-              case orientation
-              when :vertical
-                angle = direction == 1 ? 90 : 270
-                distance = (last_position.record.y_mm - first_position.record.y_mm).abs
-              when :horizontal
-                angle = direction == 1 ? 0 : 180
-                distance = (last_position.record.x_mm - first_position.record.x_mm).abs
-              else
-                angle = (Math.atan(k) * 180 / Math::PI).round
-                case [direction_x, direction_y]
-                when [1, 1]
-                  angle += 0
-                when [1, -1]
-                  angle += 360
-                when [-1, 1]
-                  angle += 180
-                when [-1, -1]
-                  angle += 180
-                end
-                distance = Math.sqrt((last_position.record.x_mm - first_position.record.x_mm)**2 + (last_position.record.y_mm - first_position.record.y_mm)**2)
-              end
-              next if distance < jitter_threshold
-
-              [
-                finger,
-                {
-                  angle: angle,
-                  distance: distance,
-                  first_position: { x: first_position.record.x_mm, y: first_position.record.y_mm },
-                  last_position: { x: last_position.record.x_mm, y: last_position.record.y_mm }
-                }
-              ]
-            end
+            [finger, { first_position: first_position, last_position: last_position }]
           end.compact.to_h
         end
 
         private
 
-        def axis_threshold
-          2.0 # TODO: make it configurable
-        end
-
-        def jitter_threshold
-          5.0 # TODO: configurable
+        def movement_threshold
+          0.5 # TODO: configurable
         end
 
         def reset_memoized

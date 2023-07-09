@@ -14,9 +14,11 @@ module Fusuma
             return unless touch_buffer.moved?
 
             MultiLogger.debug('  angles?')
-            angles = touch_buffer.finger_movements.map { |_, movement| movement[:angle] }
+            angles = touch_buffer.finger_movements.map do |_, movement|
+              Touchscreen::Math.angle_between(movement[:first_position], movement[:last_position])
+            end
             angles.combination(2).each do |angle1, angle2|
-              if Touchscreen::Math.angles_difference(angle1, angle2) > movement_angle_threshold
+              if Touchscreen::Math.angles_difference(angle1, angle2).abs > movement_angle_threshold
                 MultiLogger.debug("  !too much difference between #{angle1} and #{angle2}, not a swipe")
                 return
               end

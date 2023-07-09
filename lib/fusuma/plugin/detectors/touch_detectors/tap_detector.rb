@@ -1,10 +1,10 @@
-require_relative './base'
+require_relative './tap_hold_base'
 
 module Fusuma
   module Plugin
     module Detectors
       module TouchDetectors
-        class TapDetector < Base
+        class TapDetector < TapHoldBase
 
           def detect(touch_buffer)
             MultiLogger.debug('> tap detector')
