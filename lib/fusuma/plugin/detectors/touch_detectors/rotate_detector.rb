@@ -23,7 +23,7 @@ module Fusuma
 
             MultiLogger.debug('  angle change for the first finger?')
             center = Touchscreen::Math.center(touch_buffer.finger_movements.map { |_, v| v[:first_position] })
-            first_finger = touch_buffer.finger_movements[0]
+            first_finger = touch_buffer.finger_movements.values.first
             begin_angle = Touchscreen::Math.angle_between(center, first_finger[:first_position])
             end_angle = Touchscreen::Math.angle_between(center, first_finger[:last_position])
             angle_change = Touchscreen::Math.angles_difference(end_angle, begin_angle)
@@ -61,6 +61,12 @@ module Fusuma
           private
 
           def angle_threshold
+            # such low value is because of how a human usually rotates fingers
+            # it is barely possible to draw a geometrically perfect circle
+            # in reality one finger can move very little, and another can move a lot
+            # so for the "base" finger the angle change will be very small, and for the "moving" finger it will be big
+            # if we increase the threshold, we will get a lot of false negatives
+            # which will make continuous rotate gestures very bulky
             0.1 # TODO: make configurable
           end
 

@@ -1,3 +1,6 @@
+require 'fusuma/plugin/parsers/touch_parser'
+require 'fusuma/plugin/buffers/touch_buffer'
+
 RSpec.shared_examples 'real sample' do |detector_class:, sample_path:, expected_gesture_class:, expected_gesture_attributes:|
   let(:parser) { Fusuma::Plugin::Parsers::TouchParser.new }
   let(:buffer) { Fusuma::Plugin::Buffers::TouchBuffer.new }

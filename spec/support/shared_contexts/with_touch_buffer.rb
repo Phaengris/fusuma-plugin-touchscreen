@@ -1,3 +1,5 @@
+require 'fusuma/plugin/buffers/touch_buffer'
+
 RSpec.shared_context 'with touch buffer' do
   let(:touch_buffer) { Fusuma::Plugin::Buffers::TouchBuffer.new }
   let(:t) { Time.now }
