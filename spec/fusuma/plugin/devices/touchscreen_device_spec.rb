@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require 'fusuma/plugin/inputs/libinput_command_input'
 require 'fusuma/plugin/devices/touchscreen_device'
 
 module Fusuma

@@ -1,3 +1,5 @@
+require 'fusuma/plugin/detectors/touch_detectors/pinch_detector'
+
 module Fusuma
   RSpec.describe Plugin::Detectors::TouchDetectors::PinchDetector do
     include_context 'with touch buffer'

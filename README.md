@@ -44,6 +44,8 @@ command which may be unstable.
 It is a plan to write some code to interact with libinput directly,
 but that's a task for the future.
 
+Threshold options are hard-coded and not configurable yet. That would be the next step.
+
 ## Possible issues
 
 This plugin is tested on Microsoft Surface Pro 3 only.

@@ -18,13 +18,13 @@ module Fusuma
         def initialize(*)
           super
           @detectors = [
-            # Fusuma::Plugin::Detectors::TouchDetectors::TapDetector,
-            # Fusuma::Plugin::Detectors::TouchDetectors::SwipeDetector,
-            # Fusuma::Plugin::Detectors::TouchDetectors::PinchDetector,
-            # Fusuma::Plugin::Detectors::TouchDetectors::RotateDetector,
-          # Fusuma::Plugin::Detectors::TouchDetectors::EdgeDetector
-          ].map(&:new)
-          @detectors << (@hold_detector = Fusuma::Plugin::Detectors::TouchDetectors::HoldDetector.new)
+            Fusuma::Plugin::Detectors::TouchDetectors::TapDetector.new,
+            (@hold_detector = Fusuma::Plugin::Detectors::TouchDetectors::HoldDetector.new),
+            Fusuma::Plugin::Detectors::TouchDetectors::SwipeDetector.new,
+            Fusuma::Plugin::Detectors::TouchDetectors::PinchDetector.new,
+            # Fusuma::Plugin::Detectors::TouchDetectors::RotateDetector.new,
+            # Fusuma::Plugin::Detectors::TouchDetectors::EdgeDetector.new
+          ]
           @last_known_gesture = nil
         end
 
@@ -54,10 +54,10 @@ module Fusuma
           end
 
           # current gesture ended or even new gesture began
-          if (@touch_buffer.ended? || @touch_buffer.began?) && @last_known_gesture
-            events << create_event(record: @last_known_gesture.record.create_index_record(status: 'end', trigger: :repeat)) if @last_known_gesture.record.repeatable?
-            @last_known_gesture = nil
-          end
+          # if (@touch_buffer.ended? || @touch_buffer.began?) && @last_known_gesture
+          #   events << create_event(record: @last_known_gesture.record.create_index_record(status: 'end', trigger: :repeat)) if @last_known_gesture.record.repeatable?
+          #   @last_known_gesture = nil
+          # end
 
           gesture_record = nil
           if touch_buffer
@@ -67,20 +67,34 @@ module Fusuma
             end
           else
             return events if @touch_buffer.empty?
-            # gesture_record = @hold_detector.detect(@touch_buffer)
+            gesture_record = @hold_detector.detect(@touch_buffer)
           end
 
           if gesture_record
-            @touch_buffer.clear
+            # repeat previous gesture
             if gesture_record.repeatable? && @last_known_gesture&.record == gesture_record
               @last_known_gesture = create_event(record: gesture_record)
-              events << create_event(record: gesture_record.create_index_record(status: 'update', trigger: :repeat))
+              if touch_buffer.ended?
+                events << create_event(record: gesture_record.create_index_record(status: 'end', trigger: :repeat))
+              else
+                events << create_event(record: gesture_record.create_index_record(status: 'update', trigger: :repeat))
+              end
+            # new gesture (repeatable or not)
             else
               events << create_event(record: @last_known_gesture.record.create_index_record(status: 'end', trigger: :repeat)) if @last_known_gesture&.record&.repeatable?
               @last_known_gesture = create_event(record: gesture_record)
               events << create_event(record: gesture_record.create_index_record)
-              events << create_event(record: gesture_record.create_index_record(status: 'begin', trigger: :repeat)) if gesture_record.repeatable?
+              if gesture_record.repeatable?
+                events << create_event(record: gesture_record.create_index_record(status: 'begin', trigger: :repeat))
+                # already ended? (in this very same tick)
+                events << create_event(record: gesture_record.create_index_record(status: 'end', trigger: :repeat)) if touch_buffer.ended?
+              end
             end
+            @touch_buffer.clear
+          # no new gesture, but may be the previous one ended?
+          elsif @touch_buffer&.ended? && @last_known_gesture
+            events << create_event(record: @last_known_gesture.record.create_index_record(status: 'end', trigger: :repeat)) if @last_known_gesture.record.repeatable?
+            @last_known_gesture = nil
           end
 
           events

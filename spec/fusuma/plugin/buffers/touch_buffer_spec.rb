@@ -151,7 +151,7 @@ module Fusuma
         event2 = generate_touch_event(record: generate_touch_record(status: 'update', x_mm: 1, y_mm: 2))
         subject.buffer(event1)
         subject.buffer(event2)
-        expect(subject.finger_movements).to eq({ 1 => { first_position: { x: 0, y: 0 }, last_position: { x: 1, y: 2 } } })
+        expect(subject.finger_movements).to eq({ 0 => { first_position: { x: 0.0, y: 0.0 }, last_position: { x: 1.0, y: 2.0 } } })
         expect(subject.moved?).to be_truthy
       end
     end
@@ -185,8 +185,8 @@ module Fusuma
     end
 
     describe '#duration' do
-      it 'returns nil if no begin event' do
-        expect(subject.duration).to be_nil
+      it 'zero if nothing happened' do
+        expect(subject.duration).to eq(0)
       end
 
       it 'gesture ended' do
@@ -210,7 +210,7 @@ module Fusuma
           expect(subject.duration.round).to eq(60)
         end
       end
-    end
+    end # duration
 
   end
 end

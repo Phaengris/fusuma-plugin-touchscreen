@@ -5,7 +5,7 @@ module Fusuma
   module Plugin
     module Detectors
       module TouchDetectors
-        class SwipeDetector
+        class SwipeDetector < Base
 
           def detect(touch_buffer)
             MultiLogger.debug('> swipe detector')
