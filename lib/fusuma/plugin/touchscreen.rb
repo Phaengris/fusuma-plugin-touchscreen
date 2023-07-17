@@ -1,0 +1,11 @@
+require 'fusuma/device'
+require 'fusuma/plugin/events/records/record.rb'
+require 'fusuma/plugin/parsers/parser.rb'
+require 'fusuma/plugin/buffers/buffer.rb'
+require 'fusuma/plugin/detectors/detector.rb'
+
+require_relative './devices/touchscreen_device'
+require_relative './events/records/touch_record'
+require_relative './parsers/touch_parser'
+require_relative './buffers/touch_buffer'
+require_relative './detectors/touch_detector'

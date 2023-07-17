@@ -1,0 +1,9 @@
+ event4   TOUCH_DOWN              +0.000s       0 (0) 58.64/44.04 (148.16/73.74mm)
+ event4   TOUCH_DOWN              +0.000s       1 (1) 49.33/47.67 (124.63/79.84mm)
+ event4   TOUCH_DOWN              +0.000s       2 (2) 43.54/64.23 (110.00/107.56mm)
+ event4   TOUCH_FRAME             +0.000s
+ event4   TOUCH_UP                +0.079s       2 (2)
+ event4   TOUCH_FRAME             +0.079s
+ event4   TOUCH_UP                +0.099s       1 (1)
+ event4   TOUCH_FRAME             +0.099s
+ event4   TOUCH_UP                +0.108s       0 (0)
