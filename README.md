@@ -1,5 +1,7 @@
 # Fusuma::Plugin::Touchscreen
 
+**Unfortunately I'm overloaded and have no time to work on / support the project now. Feel free to fork it if you're interested. It may be resumed it in the future but really can't promise atm.**
+
 The Fusuma plugin for touchscreens.
 
 ## Fusuma
